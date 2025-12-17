@@ -1,115 +1,51 @@
-# Grafana data source plugin template
+# MIS233 Final Project - Custom Grafana Data Source Plugin
 
-This template is a starting point for building a Data Source Plugin for Grafana.
+Bu proje, MIS233 dersi final projesi kapsamında geliştirilmiş, özel bir **Grafana Data Source** eklentisidir.
 
-## What are Grafana data source plugins?
+## Geliştirici Bilgileri
+- **Ad Soyad:** Yunus Gürbüz
+- **Öğrenci No:** 2023502045
 
-Grafana supports a wide range of data sources, including Prometheus, MySQL, and even Datadog. There’s a good chance you can already visualize metrics from the systems you have set up. In some cases, though, you already have an in-house metrics solution that you’d like to add to your Grafana dashboards. Grafana Data Source Plugins enables integrating such solutions with Grafana.
+---
 
-## Getting started
+## Özellikler & Bonuslar
 
-### Frontend
+### 1. Zorunlu Gereksinimler
+- **Config Editor:** Eklenti ayarlar sayfasında isim sabit olarak yer almaktadır.
+- **Plugin Loading:** Eklenti Docker ortamında sorunsuz yüklenmekte ve Grafana tarafından tanınmaktadır.
 
-1. Install dependencies
+### 2. Bonus Özellikler
+- **Table Format:** Veriler zaman serisi yerine, daha okunaklı olan **Table (Tablo)** formatına dönüştürülmüştür.
+- **Query Parameters:** Query Editor üzerinde 2 adet dinamik filtreleme alanı (Filtre 1 & Filtre 2) bulunmaktadır.
+- **Mock Data & REST API:** Sistem, hata yönetimini simüle etmek ve stabil çalışmak için Mock Data yapısı kullanmaktadır.
+- **Connection Test:** `testDatasource` metodu ile eklentinin bağlantı durumu ve hata mesajları yönetilmektedir.
 
-   ```bash
-   npm install
-   ```
+---
 
-2. Build plugin in development mode and run in watch mode
+## Kurulum ve Çalıştırma
 
-   ```bash
-   npm run dev
-   ```
+**1. Öncelikle projeyi bilgisayarınıza indirin ve terminal üzerinden proje klasörüne giriş yapın**  
+```bash git clone <https://github.com/ynsgrb/mis233-final-project.git>```  
+```bash cd <mis233-yunus-datasource>```
 
-3. Build plugin in production mode
+**2. Projenin çalışması için gerekli olan paketleri yüklemek için aşağıdaki komutu çalıştırın. (Bilgisayarınızda Node.js yüklü olmalıdır)**   
+```bash npm install```  
 
-   ```bash
-   npm run build
-   ```
+**3. Eklentinin Grafana tarafından okunabilir hale gelmesi ve sürekli güncel kalması için geliştirme modunu başlatın**  
+```bash npm run dev```  
+(Bu terminali kapatmayın)
 
-4. Run the tests (using Jest)
+**4. Grafana sunucusunu ayağa kaldırmak için yeni bir terminal açın ve proje klasöründeyken şu komutu verin**  
+```bash docker compose up -d```
 
-   ```bash
-   # Runs the tests and watches for changes, requires git init first
-   npm run test
+**5. Grafana Arayüzüne Giriş Yapın**  
+Tarayıcınızı açın ve şu adrese gidin: http://localhost:3000  
+Kullanıcı Adı: admin  
+Şifre: admin
 
-   # Exits after running all the tests
-   npm run test:ci
-   ```
-
-5. Spin up a Grafana instance and run the plugin inside it (using Docker)
-
-   ```bash
-   npm run server
-   ```
-
-6. Run the E2E tests (using Playwright)
-
-   ```bash
-   # Spins up a Grafana instance first that we tests against
-   npm run server
-
-   # If you wish to start a certain Grafana version. If not specified will use latest by default
-   GRAFANA_VERSION=11.3.0 npm run server
-
-   # Starts the tests
-   npm run e2e
-   ```
-
-7. Run the linter
-
-   ```bash
-   npm run lint
-
-   # or
-
-   npm run lint:fix
-   ```
-
-# Distributing your plugin
-
-When distributing a Grafana plugin either within the community or privately the plugin must be signed so the Grafana application can verify its authenticity. This can be done with the `@grafana/sign-plugin` package.
-
-_Note: It's not necessary to sign a plugin during development. The docker development environment that is scaffolded with `@grafana/create-plugin` caters for running the plugin without a signature._
-
-## Initial steps
-
-Before signing a plugin please read the Grafana [plugin publishing and signing criteria](https://grafana.com/legal/plugins/#plugin-publishing-and-signing-criteria) documentation carefully.
-
-`@grafana/create-plugin` has added the necessary commands and workflows to make signing and distributing a plugin via the grafana plugins catalog as straightforward as possible.
-
-Before signing a plugin for the first time please consult the Grafana [plugin signature levels](https://grafana.com/legal/plugins/#what-are-the-different-classifications-of-plugins) documentation to understand the differences between the types of signature level.
-
-1. Create a [Grafana Cloud account](https://grafana.com/signup).
-2. Make sure that the first part of the plugin ID matches the slug of your Grafana Cloud account.
-   - _You can find the plugin ID in the `plugin.json` file inside your plugin directory. For example, if your account slug is `acmecorp`, you need to prefix the plugin ID with `acmecorp-`._
-3. Create a Grafana Cloud API key with the `PluginPublisher` role.
-4. Keep a record of this API key as it will be required for signing a plugin
-
-## Signing a plugin
-
-### Using Github actions release workflow
-
-If the plugin is using the github actions supplied with `@grafana/create-plugin` signing a plugin is included out of the box. The [release workflow](./.github/workflows/release.yml) can prepare everything to make submitting your plugin to Grafana as easy as possible. Before being able to sign the plugin however a secret needs adding to the Github repository.
-
-1. Please navigate to "settings > secrets > actions" within your repo to create secrets.
-2. Click "New repository secret"
-3. Name the secret "GRAFANA_API_KEY"
-4. Paste your Grafana Cloud API key in the Secret field
-5. Click "Add secret"
-
-#### Push a version tag
-
-To trigger the workflow we need to push a version tag to github. This can be achieved with the following steps:
-
-1. Run `npm version <major|minor|patch>`
-2. Run `git push origin main --follow-tags`
-
-## Learn more
-
-Below you can find source code for existing app plugins and other related documentation.
-
-- [Basic data source plugin example](https://github.com/grafana/grafana-plugin-examples/tree/master/examples/datasource-basic#readme)
-- [`plugin.json` documentation](https://grafana.com/developers/plugin-tools/reference/plugin-json)
-- [How to sign a plugin?](https://grafana.com/developers/plugin-tools/publish-a-plugin/sign-a-plugin)
+**6. Eklentiyi Aktifleştirin ve Test Edin**  
+Sol menüden Connections -> Data Sources yolunu izleyin.  
+Add data source butonuna basın.  
+Arama kutusuna eklentinin adını (yunus-datasource) yazın ve seçin.  
+Açılan sayfada "Save & Test" butonuna basarak yeşil onay mesajını görün.  
+Dashboards -> New Dashboard -> Add Visualization diyerek verilerinizi tablo formatında izlemeye başlayın.

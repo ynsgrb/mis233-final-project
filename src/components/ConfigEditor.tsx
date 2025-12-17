@@ -45,7 +45,7 @@ export function ConfigEditor(props: Props) {
 
   return (
     <>
-      <div style={{ padding: '20px', border: '1px solid #eb7b18', borderRadius: '10px' }}>
+      <div style={{textAlign: 'center', padding: '20px', border: '1px solid #eb7b18', borderRadius: '10px' }}>
       <h2>Developed by Yunus Gürbüz - Fall 2025</h2>
       </div>
       <InlineField label="Path" labelWidth={14} interactive tooltip={'Json field returned to frontend'}>

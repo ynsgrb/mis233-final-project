@@ -36,3 +36,5 @@ export interface MyQuery extends DataQuery {
   queryText?: string;
   ikinciParametre?: string; 
 }
+
+
