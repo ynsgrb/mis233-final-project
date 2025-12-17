@@ -25,7 +25,7 @@ Bu proje, MIS233 dersi final projesi kapsamında geliştirilmiş, özel bir **Gr
 ## Kurulum ve Çalıştırma
 
 **1. Öncelikle projeyi bilgisayarınıza indirin ve terminal üzerinden proje klasörüne giriş yapın**  
-```bash git clone <https://github.com/ynsgrb/mis233-final-project.git>```  
+```git clone <https://github.com/ynsgrb/mis233-final-project.git>```  
 ```bash cd <mis233-yunus-datasource>```
 
 **2. Projenin çalışması için gerekli olan paketleri yüklemek için aşağıdaki komutu çalıştırın. (Bilgisayarınızda Node.js yüklü olmalıdır)**   
