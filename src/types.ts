@@ -32,3 +32,7 @@ export interface MyDataSourceOptions extends DataSourceJsonData {
 export interface MySecureJsonData {
   apiKey?: string;
 }
+export interface MyQuery extends DataQuery {
+  queryText?: string;
+  ikinciParametre?: string; 
+}

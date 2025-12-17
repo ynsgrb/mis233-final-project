@@ -1,45 +1,47 @@
 import React, { ChangeEvent } from 'react';
-import { InlineField, Input, Stack } from '@grafana/ui';
+import { InlineField, Input } from '@grafana/ui';
 import { QueryEditorProps } from '@grafana/data';
 import { DataSource } from '../datasource';
-import { MyDataSourceOptions, MyQuery } from '../types';
+import { MyQuery, MyDataSourceOptions } from '../types';
 
 type Props = QueryEditorProps<DataSource, MyQuery, MyDataSourceOptions>;
 
 export function QueryEditor({ query, onChange, onRunQuery }: Props) {
+  // BİRİNCİ FİLTRE FONKSİYONU
   const onQueryTextChange = (event: ChangeEvent<HTMLInputElement>) => {
     onChange({ ...query, queryText: event.target.value });
-  };
-
-  const onConstantChange = (event: ChangeEvent<HTMLInputElement>) => {
-    onChange({ ...query, constant: parseFloat(event.target.value) });
-    // executes the query
     onRunQuery();
   };
 
-  const { queryText, constant } = query;
+  // İKİNCİ FİLTRE FONKSİYONU
+  const onIkinciParametreChange = (event: ChangeEvent<HTMLInputElement>) => {
+    onChange({ ...query, ikinciParametre: event.target.value });
+    onRunQuery();
+  };
 
   return (
-    <Stack gap={0}>
-      <InlineField label="Constant">
-        <Input
-          id="query-editor-constant"
-          onChange={onConstantChange}
-          value={constant}
-          width={8}
-          type="number"
-          step="0.1"
-        />
-      </InlineField>
-      <InlineField label="Query Text" labelWidth={16} tooltip="Not used yet">
-        <Input
-          id="query-editor-query-text"
-          onChange={onQueryTextChange}
-          value={queryText || ''}
-          required
-          placeholder="Enter a query"
-        />
-      </InlineField>
-    </Stack>
+    <div>
+      <div className="gf-form">
+        <InlineField label="Filtre 1" labelWidth={16} tooltip="Birinci filtre">
+          <Input
+            onChange={onQueryTextChange}
+            value={query.queryText || ''}
+            placeholder="Filtre 1"
+            width={40}
+          />
+        </InlineField>
+      </div>
+
+      <div className="gf-form">
+        <InlineField label="Filtre 2" labelWidth={16} tooltip="İkinci filtre">
+          <Input
+            onChange={onIkinciParametreChange}
+            value={query.ikinciParametre || ''}
+            placeholder="Filtre 2"
+            width={40}
+          />
+        </InlineField>
+      </div>
+    </div>
   );
 }
