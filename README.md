@@ -26,17 +26,17 @@ Bu proje, MIS233 dersi final projesi kapsamında geliştirilmiş, özel bir **Gr
 
 **1. Öncelikle projeyi bilgisayarınıza indirin ve terminal üzerinden proje klasörüne giriş yapın**  
 ```git clone <https://github.com/ynsgrb/mis233-final-project.git>```  
-```bash cd <mis233-yunus-datasource>```
+```cd <mis233-yunus-datasource>```
 
 **2. Projenin çalışması için gerekli olan paketleri yüklemek için aşağıdaki komutu çalıştırın. (Bilgisayarınızda Node.js yüklü olmalıdır)**   
-```bash npm install```  
+```npm install```  
 
 **3. Eklentinin Grafana tarafından okunabilir hale gelmesi ve sürekli güncel kalması için geliştirme modunu başlatın**  
-```bash npm run dev```  
+```npm run dev```  
 (Bu terminali kapatmayın)
 
 **4. Grafana sunucusunu ayağa kaldırmak için yeni bir terminal açın ve proje klasöründeyken şu komutu verin**  
-```bash docker compose up -d```
+```docker compose up -d```
 
 **5. Grafana Arayüzüne Giriş Yapın**  
 Tarayıcınızı açın ve şu adrese gidin: http://localhost:3000  
